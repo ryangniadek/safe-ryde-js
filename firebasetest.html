@@ -1,0 +1,90 @@
+<style>
+
+</style>
+<div>
+
+</div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
+
+
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDGE64JqjT4ZzggJq5F91evLJ6LrzMHgCY",
+    authDomain: "saferyde-cbc2b.firebaseapp.com",
+    databaseURL: "https://saferyde-cbc2b.firebaseio.com",
+    projectId: "saferyde-cbc2b",
+    storageBucket: "saferyde-cbc2b.appspot.com",
+    messagingSenderId: "608465267582",
+    appId: "1:608465267582:web:ceee3a149ac5a648e8212f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+</script>
+
+<script>
+  // firebase.database().ref("users/").set({
+  //   John: {
+  //     number: 1,
+  //     age: 30
+  //  }
+  // })
+  // firebase.database().ref().on("value", function (snapshot) {
+  //   console.log(snapshot.val());
+
+  // });
+
+  //   var ree;
+  //   function getCounter() {
+  //     firebase.database().ref("Counter/").on("value", function (snapshot) {
+  //       ree = snapshot.val();
+  //       console.log(ree);
+  //     })
+  //   }
+
+  //  function updateCounterold() {
+  //     var count = getCounter();
+  //     firebase.database().ref().set({
+  //       Counter: count
+  //     })
+  //   }
+
+
+  function updateCounter() {
+    firebase.database().ref("Counter/").on("value", function (snapshot) {
+      var currentCount = snapshot.val();
+      currentCount += 1;
+      firebase.database().ref().set({
+        Counter: currentCount
+      })
+    })
+  }
+
+  function addNewRide() {
+    //updateCounter();
+    firebase.database().ref("Counter/").on("value", function (snapshot) {
+      var count = snapshot.val();
+      var rideName = "ride" + count;
+      firebase.database().ref("waitingRides/").push({
+          name:"worked"
+      })
+    })
+
+  }
+
+
+
+</script>
+
+<button onclick="addNewRide()">Click me</button> 
