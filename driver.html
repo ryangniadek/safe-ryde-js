@@ -161,7 +161,7 @@
         }
 
         async function sleepForSecond() {
-            await sleep(50);
+            await sleep(100);
 
 
             setToActive2();
@@ -180,7 +180,7 @@
         // }
 
         async function finalCheck() {
-            await sleep(500);
+            await sleep(1000);
             document.getElementById("name").innerHTML = "Name:\t" + ownerName;
             document.getElementById("phone").innerHTML = "Phone:\t" + phoneNumber;
             document.getElementById("passengers").innerHTML = "Passengers:\t" + numPassengers;
