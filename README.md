@@ -3,8 +3,11 @@ Developed at VTHacks7
 By Ryan Gniadek, Ben Bernstein, Bryan Wells, Ronin Jayden
 
 
+## Run the Code
+To run the code just pull the repo (recommended) or click "Releases" and choose the latest version. Open index.html in the browser, which is the homepage.
+
 ## Inspiration
-Everyone wants a safe ride home. On the one hand, ride sharing services have a convenient interface but are expensive. On the other hand, coordinating rides with friends is difficult to organize. Safe Ryde is a way to streamline rides from friends.
+Everyone wants a safe ride home. On the one hand, ride sharing services have a convenient interface but are expensive. On the other hand, coordinating rides with friends is difficult to organize. Safe Ryde is a way to streamline rides from friends. 
 
 ## What it does
 Safe Ryde has two user modes, Driver and Passenger. Passengers can request a ride and be added to the queue. Drivers can pick up the next passenger in line and receive information about the ride. They even have buttons to place a call to the passenger and let them know they've arrived and buttons to open the locations (pickup and drop-off) in Google Maps).
