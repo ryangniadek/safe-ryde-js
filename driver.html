@@ -90,13 +90,6 @@
         var startLocation = "";
         var endLocation = "";
 
-        function retrieveRide() {
-            /*
-            Implement Retrieve Ride Here. 
-            Goal should be to add values to the variables above.
-            */
-        }
-
         function maps(location) {
             if (location == 'pickup') {
                 window.open('https://www.google.com/maps/search/' + startLocation, '_blank');
@@ -110,8 +103,36 @@
             window.open('tel:' + phoneNumber, '_blank')
         }
 
-        //Uncomment function call when implemented
-        //retreiveRide();
+        setToActive();
+        function setToActive(){
+            firebase.database().ref("waitingRides").once("value", function (snapshot) {
+            var values = snapshot.val();
+            var keys = Object.keys(values);
+            for (var i = 0; i < keys.length; i++) {
+                firebase.database().ref("waitingRides/" + keys[i]).once("value", function (newsnapshot) {
+                    if (!newsnapshot.val()["isActive"]){
+                        waitingRides.push(newsnapshot.val()["idnumber"]);
+                    }
+                })
+            }
+            sleepForSecond();
+        });
+        }
+
+        function setToActive2(){
+            var lowest = Infinity;
+            for (var i = 0; i < waitingRides.length; i++){
+                if (waitingRides[i] < lowest){
+                    lowest = waitingRides[i];
+                }
+            }
+            firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
+        }
+
+        async function sleepForSecond(){
+            await sleep(2000);
+            setToActive2();
+        }
 
         document.getElementById("name").innerHTML = "Name:\t" + ownerName;
         document.getElementById("phone").innerHTML = "Phone:\t" + phoneNumber;
