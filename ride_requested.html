@@ -102,15 +102,7 @@
 
         }
         addNewRide();
-        firebaseTest();
-        function firebaseTest() {
-            var temp;
-            firebase.database().ref("waitingRides/ride50/endingPlace").set("itworked");
-            firebase.database().ref("waitingRides/ride50/endingPlace").once("value", function snapshot{
-                temp = snapshot.val();
-            })
-        }
-        //setRideActive();
+        setRideActive();
         var indexes = [];
         var hasSetActive = false;
 
