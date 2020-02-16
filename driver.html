@@ -11,22 +11,43 @@
 <body>
     <div class="w3-container w3-red">
         <h1>This is the next ride:</h1>
+        <div class="w3-container w3-white">
+            <div class="w3-container">
+                <p id="name"></p>
+                <p id="phone"></p>
+                <p id="passengers"></p>
+                <p id="start"></p>
+                <p id="end"></p>
+            </div>
+
+            <div class="w3-center w3-container">
+                <br>
+                <button class="w3-button w3-green" onclick="maps('pickup')">View Pickup Location in Google Maps</button>
+                <br>
+            </div>
+
+            <div class="w3-center w3-container">
+                <br>
+                <button class="w3-button w3-purple" onclick="maps('dropoff')">View Dropoff Location in Google
+                    Maps</button>
+                <br>
+            </div>
+
+            <div class="w3-center w3-container">
+                <br>
+                <button class="w3-button w3-blue" onclick="phone()">Call The Passenger</button>
+                <br>
+            </div>
+
+            <div class="w3-center w3-container">
+                <br>
+                <a href="index.html" class="w3-btn w3-black">Return to Home</a>
+                <br><br>
+            </div>
+        </div>
     </div>
 
-    <div class="w3-container">
-        <br><br>
-        <p id="name"></p>
-        <p id="phone"></p>
-        <p id="passengers"></p>
-        <p id="start"></p>
-        <p id="end"></p>
-    </div>
-    
-    <div class="w3-container">
-        <br><br>
-        <a href="index.html" class="w3-btn w3-black">Return to Home</a>
-        <br><br>
-    </div>
+
 
 
     <div class="w3-container w3-red">
@@ -77,14 +98,27 @@
             */
         }
 
+        function maps(location) {
+            if (location == 'pickup') {
+                window.open('https://www.google.com/maps/search/' + startLocation, '_blank');
+            }
+            else {
+                window.open('https://www.google.com/maps/search/' + endLocation, '_blank');
+            }
+        }
+
+        function phone() {
+            window.open('tel:' + phoneNumber, '_blank')
+        }
+
         //Uncomment function call when implemented
         //retreiveRide();
 
         document.getElementById("name").innerHTML = "Name:\t" + ownerName;
         document.getElementById("phone").innerHTML = "Phone:\t" + phoneNumber;
-        document.getElementById("passengers").innerHTML = "Passengers:\t" + numPassengers; 
-        document.getElementById("start").innerHTML = "Pickup Location:\t" + startLocation; 
-        document.getElementById("end").innerHTML = "Ending Location:\t" + endLocation; 
+        document.getElementById("passengers").innerHTML = "Passengers:\t" + numPassengers;
+        document.getElementById("start").innerHTML = "Pickup Location:\t" + startLocation;
+        document.getElementById("end").innerHTML = "Dropoff Location:\t" + endLocation;
 
 
     </script>
