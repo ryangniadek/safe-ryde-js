@@ -1,54 +1,71 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <meta charset="UTF-8">
-        <title>Request Ride</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    </head>
-    
-    <body>
-        <div class="w3-container w3-deep-orange">
-            <h1>Request a Ride</h1> 
-            <p>Use the form below to request a ride!</p> 
-        </div>
 
-        <div class="w3-container">
-            <form class="w3-container" action="results.html" method="get">
-                        <br>
-                        <label>Your Name:</label> 
-                        <input class="w3-input" type="text" name="name">
-                        <br>
-                        <br>
-                        <label>Your Phone Number:</label>
-                        <input class="w3-input" type="tel" name="phone">
-                        <br>
-                        <br>
-                        <label>Number of Passengers: </label>
-                        <input class="w3-input" type="number" name="passengers">
-                        <br>
-                        <br>
-                        <label>Start Location:</label>
-                        <input class="w3-input" type="text" name="start">
-                        <br>
-                        <br>
-                        <label>End Location:</label>
-                        <input class="w3-input" type="text" name="end">
-                        <br>
-                        <br>
-                        <input class="w3-btn w3-black" type="submit" value="Request Ride">
-                        <br>
-                        <br>
-            </form>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Request Ride</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
 
-        <div class="w3-container w3-red">
-            <h5>Developed at VTHacks7</h5>
-            <p>By Ryan Gniadek, Ben Bernstein, Bryan Wells, Ronin Jayden</p>
-        </div> 
+<body>
+    <div class="w3-bar w3-black">
+        <button class="w3-bar-item w3-button" onclick="openView('Passenger')">Passenger</button>
+        <button class="w3-bar-item w3-button" onclick="openView('Driver')">Driver</button>
+    </div>
 
-    </body>
+    <div id="Passenger" class="w3-container w3-red view">
+        <h1>Request a Ride</h1>
+        <p>Use the form below to request a ride!</p>
+        <form class="w3-container w3-white" action="ride_requested.html" method="get">
+            <br>
+            <label>Your Name:</label>
+            <input class="w3-input" type="text" name="name">
+            <br>
+            <br>
+            <label>Your Phone Number:</label>
+            <input class="w3-input" type="tel" name="phone">
+            <br>
+            <br>
+            <label>Number of Passengers: </label>
+            <input class="w3-input" type="number" name="passengers">
+            <br>
+            <br>
+            <label>Start Location:</label>
+            <input class="w3-input" type="text" name="start">
+            <br>
+            <br>
+            <label>End Location:</label>
+            <input class="w3-input" type="text" name="end">
+            <br>
+            <br>
+            <input class="w3-btn w3-black" type="submit" value="Request Ride">
+            <br>
+            <br>
+        </form>
+    </div>
 
-    
+    <div id="Driver" class="w3-container w3-red view">
+        <p>Driver Stuff Goes Here</p>
+    </div>
+
+    <div id="footer" class="w3-container w3-red">
+        <h5>Developed at VTHacks7</h5>
+        <p>By Ryan Gniadek, Ben Bernstein, Bryan Wells, Ronin Jayden</p>
+    </div>
+
+    <script>
+        function openView(viewName) {
+            var i;
+            var x = document.getElementsByClassName("view");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(viewName).style.display = "block";
+        }
+    </script>
+
+</body>
+
+
 </html>
