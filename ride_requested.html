@@ -103,100 +103,11 @@
         }
         var waitingRides = [];
         addNewRide();
-        setToActive();
-        function setToActive(){
-            firebase.database().ref("waitingRides").once("value", function (snapshot) {
-            var values = snapshot.val();
-            var keys = Object.keys(values);
-            for (var i = 0; i < keys.length; i++) {
-                firebase.database().ref("waitingRides/" + keys[i]).once("value", function (newsnapshot) {
-                    if (!newsnapshot.val()["isActive"]){
-                        waitingRides.push(newsnapshot.val()["idnumber"]);
-                    }
-                    // if (!newsnapshot.val()){
-                    //     waitingRides.push(newsnapshot.val());
-                    //     console.log(waitingRides);
-                    // }
-                })
-            }
-            sleepForSecond();
-        });
-        }
-
-        function setToActive2(){
-            var lowest = Infinity;
-            for (var i = 0; i < waitingRides.length; i++){
-                if (waitingRides[i] < lowest){
-                    lowest = waitingRides[i];
-                }
-            }
-            firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
-        }
-
-        async function sleepForSecond(){
-            await sleep(2000);
-            setToActive2();
-        }
+        
 
 
 
-        //setRideActive();
-        var indexes = [];
-        var hasSetActive = false;
-
-
-        // async function setRideActive() {
-        //     var i = 0;
-        //     var tempNum
-        //     for (i = 0; i < 100; i++) {
-        //         firebase.database().ref("waitingRides/ride" + i + "/idnumber").once("value", function (snapshot) {
-
-        //             tempNum = snapshot.val();
-        //             if (tempNum != null) {
-        //                 firebase.database().ref("waitingRides/ride" + tempNum + "/isActive").once("value", function (newSnap) {
-        //                     console.log(newSnap.val());
-        //                     console.log("tempnum" + tempNum);
-        //                     if (!newSnap.val()) {
-        //                         indexes.push(tempNum);
-        //                         if (hasSetActive == false) {
-        //                             hasSetActive = true;
-        //                             waitTime();
-        //                         }
-        //                     }
-        //                 })
-        //             }
-
-        //         })
-        //     }
-        // }
-
-        // function setActiveRide2() {
-        //     var lowest = Infinity;
-        //     for (var i = 0; i < indexes.length; i++) {
-        //         if (indexes[i] < lowest) {
-        //             lowest = indexes[i];
-        //         }
-        //     }
-        //     console.log(lowest);
-        //     firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
-        // }
-
-
-        // async function waitTime() {
-        //     await sleep(1000);
-        //     console.log(indexes);
-        //     setActiveRide2();
-
-        // }
-
-
-
-
-        // console.log(ownerName);
-        // console.log(phoneNumber);
-        // console.log(numPassengers);
-        // console.log(startLocation);
-        // console.log(endLocation);
+        
     </script>
 
 </body>
