@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <title>Request Ride</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Request Ride</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    
     <body>
+        <div class="w3-container w3-deep-orange">
+            <h1>Request a Ride</h1> 
+            <p>Use the form below to request a ride!</p> 
+        </div>
 
-    <div class="w3-container w3-red">
-        <h1>Request a Ride</h1> 
-        <p>Use the form below to request a ride!</p> 
-    </div>
+        <div class="w3-container">
+            <form class="w3-container" action="results.html" method="get">
+                        <br>
+                        <label>Your Name:</label> 
+                        <input class="w3-input" type="text" name="name">
+                        <br>
+                        <br>
+                        <label>Your Phone Number:</label>
+                        <input class="w3-input" type="tel" name="phone">
+                        <br>
+                        <br>
+                        <label>Number of Passengers: </label>
+                        <input class="w3-input" type="number" name="passengers">
+                        <br>
+                        <br>
+                        <label>Start Location:</label>
+                        <input class="w3-input" type="text" name="start">
+                        <br>
+                        <br>
+                        <label>End Location:</label>
+                        <input class="w3-input" type="text" name="end">
+                        <br>
+                        <br>
+                        <input class="w3-btn w3-black" type="submit" value="Request Ride">
+                        <br>
+                        <br>
+            </form>
+        </div>
 
-    <div class="w3-row-padding">
-        <form action="results.html" method="get">
-                    Your Name: <input type="text" name="name">
-                    <br>
-                    <br>
-                    Your Phone Number: <input type="tel" name="phone">
-                    <br>
-                    <br>
-                    Number of Passengers: <input type="number" name="passengers">
-                    <br>
-                    <br>
-                    Start Location: <input type="text" name="start">
-                    <br>
-                    <br>
-                    End Location: <input type="text" name="end">
-                    <br>
-                    <br>
-                    <input type="submit" value="Request Ride">
-        </form>
-    </div>
+        <div class="w3-container w3-red">
+            <h5>Developed at VTHacks7</h5>
+            <p>By Ryan Gniadek, Ben Bernstein, Bryan Wells, Ronin Jayden</p>
+        </div> 
+
     </body>
+
+    
 </html>
