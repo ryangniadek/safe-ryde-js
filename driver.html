@@ -104,32 +104,32 @@
         }
 
         setToActive();
-        function setToActive(){
+        function setToActive() {
             firebase.database().ref("waitingRides").once("value", function (snapshot) {
-            var values = snapshot.val();
-            var keys = Object.keys(values);
-            for (var i = 0; i < keys.length; i++) {
-                firebase.database().ref("waitingRides/" + keys[i]).once("value", function (newsnapshot) {
-                    if (!newsnapshot.val()["isActive"]){
-                        waitingRides.push(newsnapshot.val()["idnumber"]);
-                    }
-                })
-            }
-            sleepForSecond();
-        });
+                var values = snapshot.val();
+                var keys = Object.keys(values);
+                for (var i = 0; i < keys.length; i++) {
+                    firebase.database().ref("waitingRides/" + keys[i]).once("value", function (newsnapshot) {
+                        if (!newsnapshot.val()["isActive"]) {
+                            waitingRides.push(newsnapshot.val()["idnumber"]);
+                        }
+                    })
+                }
+                sleepForSecond();
+            });
         }
 
-        function setToActive2(){
+        function setToActive2() {
             var lowest = Infinity;
-            for (var i = 0; i < waitingRides.length; i++){
-                if (waitingRides[i] < lowest){
+            for (var i = 0; i < waitingRides.length; i++) {
+                if (waitingRides[i] < lowest) {
                     lowest = waitingRides[i];
                 }
             }
             firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
         }
 
-        async function sleepForSecond(){
+        async function sleepForSecond() {
             await sleep(2000);
             setToActive2();
         }
