@@ -24,8 +24,38 @@
         <p>By Ryan Gniadek, Ben Bernstein, Bryan Wells, Ronin Jayden</p>
     </div>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
+
+
+
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
+
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDGE64JqjT4ZzggJq5F91evLJ6LrzMHgCY",
+            authDomain: "saferyde-cbc2b.firebaseapp.com",
+            databaseURL: "https://saferyde-cbc2b.firebaseio.com",
+            projectId: "saferyde-cbc2b",
+            storageBucket: "saferyde-cbc2b.appspot.com",
+            messagingSenderId: "608465267582",
+            appId: "1:608465267582:web:ceee3a149ac5a648e8212f"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+    </script>
+
+    <script>
+
+
+
         function getQueryVariable(variable) {
             var query = window.location.search.substring(1);
             var vars = query.split("&");
@@ -42,7 +72,23 @@
         var startLocation = getQueryVariable("start");
         var endLocation = getQueryVariable("end");
 
+        function addNewRide() {
+            //updateCounter();
+            firebase.database().ref("Counter/").on("value", function (snapshot) {
+                var count = snapshot.val();
+                var rideName = "ride" + count;
+                firebase.database().ref("waitingRides/").push({
+                    name: ownerName,
+                    number: phoneNumber,
+                    passengeNumber: numPassengers,
+                    startingPlace: startLocation,
+                    endingPlace: endLocation
+                })
+            })
 
+        }
+
+        addNewRide();
         console.log(ownerName);
         console.log(phoneNumber);
         console.log(numPassengers);
