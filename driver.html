@@ -129,14 +129,9 @@
             firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
         }
 
-<<<<<<< HEAD
-        async function sleepForSecond() {
-            await sleep(2000);
-=======
         async function sleepForSecond(){
             await sleep(1000);
 
->>>>>>> 0f853f3d3c9c15c03663bf550fed660d6168b486
 
             setToActive2();
         }
