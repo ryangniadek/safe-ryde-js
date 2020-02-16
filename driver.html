@@ -102,7 +102,7 @@
         function phone() {
             window.open('tel:' + phoneNumber, '_blank')
         }
-
+        var waitingRides = [];
         setToActive();
         function setToActive() {
             firebase.database().ref("waitingRides").once("value", function (snapshot) {
@@ -127,20 +127,54 @@
                 }
             }
             firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
+            firebase.database().ref("waitingRides/ride" + lowest + "/name").once("value", function (snapshot) {
+                ownerName = snapshot.val();
+            });
+            firebase.database().ref("waitingRides/ride" + lowest + "/number").once("value", function (snapshot) {
+                phoneNumber = snapshot.val();
+            });
+            firebase.database().ref("waitingRides/ride" + lowest + "/passengeNumber").once("value", function (snapshot) {
+                numPassengers = snapshot.val();
+            });
+            firebase.database().ref("waitingRides/ride" + lowest + "/startingPlace").once("value", function (snapshot) {
+                startLocation = snapshot.val();
+            });
+            firebase.database().ref("waitingRides/ride" + lowest + "/endingPlace").once("value", function (snapshot) {
+                endLocation = snapshot.val();
+            });
+        }
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        async function sleepForSecond(){
+        async function sleepForSecond() {
             await sleep(1000);
 
 
             setToActive2();
         }
 
-        document.getElementById("name").innerHTML = "Name:\t" + ownerName;
-        document.getElementById("phone").innerHTML = "Phone:\t" + phoneNumber;
-        document.getElementById("passengers").innerHTML = "Passengers:\t" + numPassengers;
-        document.getElementById("start").innerHTML = "Pickup Location:\t" + startLocation;
-        document.getElementById("end").innerHTML = "Dropoff Location:\t" + endLocation;
+        // function getNextRide(){
+        //     firebase.database().ref("waitingRides").once("value", function(snapshot){
+        //         rides = snapshot.val();
+        //         var keys = Object.keys(rides);
+        //         for (var i = 0; i < keys.length; i++){
+        //             firebase.database().ref("waitingRides/" + keys[i].once("value", function(newsnapshot){
+
+        //             }))
+        //         }
+        //     })
+        // }
+        finalCheck();
+        async function finalCheck() {
+            await sleep(2000);
+            document.getElementById("name").innerHTML = "Name:\t" + ownerName;
+            document.getElementById("phone").innerHTML = "Phone:\t" + phoneNumber;
+            document.getElementById("passengers").innerHTML = "Passengers:\t" + numPassengers;
+            document.getElementById("start").innerHTML = "Pickup Location:\t" + startLocation;
+            document.getElementById("end").innerHTML = "Dropoff Location:\t" + endLocation;
+
+        }
 
 
     </script>
