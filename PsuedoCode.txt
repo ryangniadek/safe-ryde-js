@@ -1,0 +1,28 @@
+firebase.database() = database;
+
+function makeride(start location, endlocation, user, time estimate){
+    database.set({
+        ride + sequential (1, 2, 3, 4...):
+            location: location,
+            endLocation: endLocation,
+            timeestimate: estimate
+            isActive: false
+            username: name
+            rideNumber: sequential (0, 1, 2, 3, 4...)
+    })
+}
+
+function getNextRide(){
+    database.update({
+        scan for lowest inactive ride rideNumber
+        set isActive true
+        return that ride
+    })
+
+}
+
+function finishRide(User){
+    scan for ride by user
+    if found, delete ride subtree
+    return true if successful
+}
