@@ -43,7 +43,7 @@
                 <a href="driver.html" class="w3-btn w3-red">Pickup New Passenger</a>
                 <br>
             </div>
-            
+
             <div class="w3-center w3-container">
                 <br>
                 <a href="index.html" class="w3-btn w3-black">Return to Home</a>
@@ -90,6 +90,8 @@
 
     <script>
 
+
+
         var ownerName = "";
         var phoneNumber = "";
         var numPassengers = "";
@@ -109,7 +111,9 @@
             window.open('tel:' + phoneNumber, '_blank')
         }
         var waitingRides = [];
-        setToActive();
+            setToActive();
+            finalCheck();
+
         function setToActive() {
             firebase.database().ref("waitingRides").once("value", function (snapshot) {
                 var values = snapshot.val();
@@ -127,27 +131,30 @@
 
         function setToActive2() {
             var lowest = Infinity;
-            for (var i = 0; i < waitingRides.length; i++) {
-                if (waitingRides[i] < lowest) {
-                    lowest = waitingRides[i];
+            if (waitingRides.length > 0) {
+
+                for (var i = 0; i < waitingRides.length; i++) {
+                    if (waitingRides[i] < lowest) {
+                        lowest = waitingRides[i];
+                    }
                 }
+                firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
+                firebase.database().ref("waitingRides/ride" + lowest + "/name").once("value", function (snapshot) {
+                    ownerName = snapshot.val();
+                });
+                firebase.database().ref("waitingRides/ride" + lowest + "/number").once("value", function (snapshot) {
+                    phoneNumber = snapshot.val();
+                });
+                firebase.database().ref("waitingRides/ride" + lowest + "/passengeNumber").once("value", function (snapshot) {
+                    numPassengers = snapshot.val();
+                });
+                firebase.database().ref("waitingRides/ride" + lowest + "/startingPlace").once("value", function (snapshot) {
+                    startLocation = snapshot.val();
+                });
+                firebase.database().ref("waitingRides/ride" + lowest + "/endingPlace").once("value", function (snapshot) {
+                    endLocation = snapshot.val();
+                });
             }
-            firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
-            firebase.database().ref("waitingRides/ride" + lowest + "/name").once("value", function (snapshot) {
-                ownerName = snapshot.val();
-            });
-            firebase.database().ref("waitingRides/ride" + lowest + "/number").once("value", function (snapshot) {
-                phoneNumber = snapshot.val();
-            });
-            firebase.database().ref("waitingRides/ride" + lowest + "/passengeNumber").once("value", function (snapshot) {
-                numPassengers = snapshot.val();
-            });
-            firebase.database().ref("waitingRides/ride" + lowest + "/startingPlace").once("value", function (snapshot) {
-                startLocation = snapshot.val();
-            });
-            firebase.database().ref("waitingRides/ride" + lowest + "/endingPlace").once("value", function (snapshot) {
-                endLocation = snapshot.val();
-            });
         }
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
@@ -171,7 +178,7 @@
         //         }
         //     })
         // }
-        finalCheck();
+
         async function finalCheck() {
             await sleep(500);
             document.getElementById("name").innerHTML = "Name:\t" + ownerName;
