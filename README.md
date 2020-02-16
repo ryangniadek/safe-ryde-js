@@ -9,17 +9,17 @@ Everyone wants a safe ride home. On the one hand, ride sharing services have a c
 ## What it does
 Safe Ryde has two user modes, Driver and Passenger. Passengers can request a ride and be added to the queue. Drivers can pick up the next passenger in line and receive information about the ride. They even have buttons to place a call to the passenger and let them know they've arrived and buttons to open the locations (pickup and drop-off) in Google Maps).
 
-## How I built it
+## How we built it
 Front End: HTML, CSS (W3.CSS framework), JavaScript
 Back End: Firebase Live Database, Google Cloud Platform
 
-## Challenges I ran into
+## Challenges we ran into
 Initially, we attempted to implement our own API using Java Spring. After attending a workshop at the hackathon about Firebase, we decided to use it as our back-end system instead. We learned a lot about JavaScript and RESTful services.
 
-## Accomplishments that I'm proud of
+## Accomplishments that we are proud of
 We initially set out to create a mobile friendly web interface, which is exactly what we accomplished. We have a responsive front-end and a functional link to the back-end. Our app is published at [saferyde.tech](https://saferyde.tech) thanks to a free domain from Domain.com.
 
-## What I learned
+## What we learned
 We learned about REST APIs, database technologies, JavaScript, and the importance of planning and research.
 
 ## What's next for Safe Ryde
