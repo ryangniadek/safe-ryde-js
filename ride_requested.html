@@ -74,9 +74,19 @@
         var startLocation = getQueryVariable("start");
         var endLocation = getQueryVariable("end");
 
-        var number = 0;
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+
         function addNewRide() {
-            //updateCounter();
+            firebase.database().ref("Counter/").once("value", function (snapshot) {
+                firebase.database().ref("Counter/").set(snapshot.val() + 1);
+                addNewRideHelper();
+            })
+        }
+        function addNewRideHelper() {
             firebase.database().ref("Counter/").on("value", function (snapshot) {
                 var count = snapshot.val();
                 var rideName = "ride" + count;
@@ -85,25 +95,82 @@
                     number: phoneNumber,
                     passengeNumber: numPassengers,
                     startingPlace: startLocation,
-                    endingPlace: endLocation
+                    endingPlace: endLocation,
+                    idnumber: count,
+                    isActive: false
                 })
             })
 
         }
-
-        function updateCounter() {
-            firebase.database().ref("Counter/").once("value", function (snapshot) {
-                console.log(snapshot.val());
-                firebase.database().ref("Counter/").set(snapshot.val() + 1);
+        addNewRide();
+        firebaseTest();
+        function firebaseTest() {
+            var temp;
+            firebase.database().ref("waitingRides/ride50/endingPlace").set("itworked");
+            firebase.database().ref("waitingRides/ride50/endingPlace").once("value", function snapshot{
+                temp = snapshot.val();
             })
         }
-        updateCounter();
-        addNewRide();
-        console.log(ownerName);
-        console.log(phoneNumber);
-        console.log(numPassengers);
-        console.log(startLocation);
-        console.log(endLocation);
+        //setRideActive();
+        var indexes = [];
+        var hasSetActive = false;
+
+
+        async function setRideActive() {
+            var i = 0;
+            var tempNum
+            for (i = 0; i < 100; i++) {
+                firebase.database().ref("waitingRides/ride" + i + "/idnumber").once("value", function (snapshot) {
+
+                    tempNum = snapshot.val();
+                    if (tempNum != null) {
+                        firebase.database().ref("waitingRides/ride" + tempNum + "/isActive").once("value", function (newSnap) {
+                            console.log(newSnap.val());
+                            console.log("tempnum" + tempNum);
+                            if (!newSnap.val()) {
+                                indexes.push(tempNum);
+                                if (hasSetActive == false) {
+                                    hasSetActive = true;
+                                    waitTime();
+                                }
+                            }
+                        })
+
+
+
+                    }
+
+                })
+            }
+        }
+
+        function setActiveRide2() {
+            var lowest = Infinity;
+            for (var i = 0; i < indexes.length; i++) {
+                if (indexes[i] < lowest) {
+                    lowest = indexes[i];
+                }
+            }
+            console.log(lowest);
+            firebase.database().ref("waitingRides/ride" + lowest + "/isActive").set(true);
+        }
+
+
+        async function waitTime() {
+            await sleep(1000);
+            console.log(indexes);
+            setActiveRide2();
+
+        }
+
+
+
+
+        // console.log(ownerName);
+        // console.log(phoneNumber);
+        // console.log(numPassengers);
+        // console.log(startLocation);
+        // console.log(endLocation);
     </script>
 
 </body>
