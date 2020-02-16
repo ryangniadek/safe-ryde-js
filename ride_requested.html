@@ -74,12 +74,13 @@
         var startLocation = getQueryVariable("start");
         var endLocation = getQueryVariable("end");
 
+        var number = 0;
         function addNewRide() {
             //updateCounter();
             firebase.database().ref("Counter/").on("value", function (snapshot) {
                 var count = snapshot.val();
                 var rideName = "ride" + count;
-                firebase.database().ref("waitingRides/").push({
+                firebase.database().ref("waitingRides/").child(rideName).set({
                     name: ownerName,
                     number: phoneNumber,
                     passengeNumber: numPassengers,
@@ -90,6 +91,13 @@
 
         }
 
+        function updateCounter() {
+            firebase.database().ref("Counter/").once("value", function (snapshot) {
+                console.log(snapshot.val());
+                firebase.database().ref("Counter/").set(snapshot.val() + 1);
+            })
+        }
+        updateCounter();
         addNewRide();
         console.log(ownerName);
         console.log(phoneNumber);
